@@ -1,0 +1,8 @@
+syntax: glob
+*~
+.*.swp
+*.pyc
+*.db
+*.orig
+*.log
+*.sqlite3
