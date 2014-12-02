@@ -18,10 +18,10 @@ class Club(models.Model):
 
 
 class Game(models.Model):
-    HW = 0
-    AW = 1
-    DR = 2
-    RESULT = enumerate(('Home Win', 'Away Win', 'Draw'))
+    HW = 'HW'
+    AW = 'AW'
+    DR = 'D'
+    RESULT = (('HW', 'Home Win'), ('AW', 'Away Win'), ('D', 'Draw'))
 
     home_side = models.ForeignKey(Club, related_name='home_game')
     away_side = models.ForeignKey(Club, related_name='away_game')
@@ -29,7 +29,7 @@ class Game(models.Model):
     game_date = models.DateTimeField()
     odds = models.DecimalField(max_digits=10, decimal_places=2)
     bet_expiry = models.DateTimeField()
-    result = models.PositiveIntegerField(choices=RESULT, blank=True, null=True)
+    result = models.CharField(max_length=4, choices=RESULT, blank=True)
 
     def __unicode__(self):
         return self.code

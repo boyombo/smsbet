@@ -4,12 +4,13 @@ from datetime import datetime
 
 class Batch(models.Model):
     created_on = models.DateTimeField(editable=False, default=datetime.now)
+    value = models.DecimalField(max_digits=10, decimal_places=2)
 
     class Meta:
         verbose_name_plural = 'Batches'
 
     def __unicode__(self):
-        return self.created_on.strftime('%Y-%m-%d')
+        return self.value
 
     @property
     def used(self):
@@ -31,3 +32,7 @@ class Pin(models.Model):
 
     def __unicode__(self):
         return self.pin
+
+    @property
+    def value(self):
+        return self.batch.value
