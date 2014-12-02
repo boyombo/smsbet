@@ -5,7 +5,14 @@ admin.autodiscover()
 
 urlpatterns = patterns(
     '',
-    url(r'^play/$', 'play.views.webplay', name='web_play'),
+    url(r'^$', 'play.views.webplay', name='web_play'),
     url(r'^admin/', include(admin.site.urls)),
     (r'^download/pins/', 'pins.views.download_pins'),
+)
+
+urlpatterns += patterns(
+    'django.contrib.auth.views',
+    url(r'^accounts/login/$', 'login', name='site_login'),
+    url(r'^accounts/logout/$', 'logout',
+        {'next_page': '/'}, name='site_logout'),
 )

@@ -82,23 +82,23 @@
 
         <div id="sidebar-wrapper">
              {% if user.is_authenticated %}
-             Welcome {{ user.username }}, <a href="{% url site_logout %}">logout</a>
+             Welcome {{ user.username }}, <a href="{% url 'site_logout' %}">logout</a>
              {% else %}
-               <a href="{% url site_login %}">login</a>
+               <a href="{% url 'site_login' %}">login</a>
              {% endif %}
           <div id="sidebar">
           {% block sidebar %}
            <h3>Things to do</h3>
            <ul id="sidenotes">
                {% if user.is_staff %}
-               <li><a href="{% url reply_altnumbers %}">get alternate numbers</a></li>
+               <li><a href="">get alternate numbers</a></li>
                {% endif %}
                {% if user.is_authenticated %}
-               <li><a href="{% url check_pin %}">Check if a pin is valid</a></li>
-               <li><a href="{% url check_sub %}">Check if a number is subscribed</a></li>
-               <li><a href="{% url add_sub %}">Subscribe with pin and phone number</a></li>
+               <li><a href="">Check if a pin is valid</a></li>
+               <li><a href="">Check if a number is subscribed</a></li>
+               <li><a href="">Subscribe with pin and phone number</a></li>
                {% else %}
-               <a href="{% url site_login %}">You need to login first...</a>
+               <a href="">You need to login first...</a>
                {% endif %}
            </ul>
            {% endblock %}

@@ -6,3 +6,4 @@ syntax: glob
 *.orig
 *.log
 *.sqlite3
+manage.py
