@@ -7,3 +7,4 @@ syntax: glob
 *.log
 *.sqlite3
 manage.py
+fabfile.*
