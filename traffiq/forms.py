@@ -6,3 +6,4 @@ class TrafficForm(forms.ModelForm):
 
     class Meta:
         model = TrafficReport
+        exclude = ('when',)
