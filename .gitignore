@@ -6,5 +6,6 @@ syntax: glob
 *.orig
 *.log
 *.sqlite3
-manage.py
+manage.*
 fabfile.*
+fabfile.py
