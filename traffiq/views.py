@@ -1,7 +1,9 @@
 from traffiq.forms import TrafficForm
 from django.http import HttpResponse, HttpResponseBadRequest
+from django.views.decorators.csrf import csrf_exempt
 
 
+@csrf_exempt
 def report(request):
     if request.method == 'POST':
         form = TrafficForm(request.POST)
