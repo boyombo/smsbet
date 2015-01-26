@@ -4,6 +4,7 @@ from traffiq.models import TrafficReport
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
+from django.utils.timesince import timesince
 
 import json
 
@@ -44,8 +45,9 @@ def get_markers(request):
         {
             'latitude': rep.latitude,
             'longitude': rep.longitude,
-            'response': rep.response
+            'response': rep.response,
+            'since': timesince(rep.when)
         }
         for rep in TrafficReport.objects.all()
     ]
-    return HttpResponse(json.dumps(markers), mimetype="application/json")
+    return HttpResponse(json.dumps(markers), content_type="application/json")

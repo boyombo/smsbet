@@ -8,22 +8,52 @@
       <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiIEYStrod4cuz22c4VaT8vkrEMYRX1zM"></script>
     <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
      <script type="text/javascript">
+
+
+     //var defaultLat = 6.5732;
+     //var defaultLon = 3.39998;
+     var defaultLat = 0.5732;
+     var defaultLon = 0.39998;
+      // Get user location
+     function getLocation() {
+         if (navigator.geolocation) {
+             navigator.geolocation.getCurrentPosition(storePosition);
+         } else {
+          buildMap(defaultLat, defaultLon);
+          //$('#current_lat').html('6.5732');
+          //$('#current_lon').html('3.39998');
+         }
+     }
+      function storePosition(position) {
+          //$('#current_lat').html(position.coords.latitude);
+          //$('#current_lon').html(position.coords.longitude);
+          buildMap(position.coords.latitude, position.coords.longitude);
+      }
+
+      getLocation();
+      //alert(longitude);
+
       function initialize() {
       }
       google.maps.event.addDomListener(window, 'load', initialize);
       // Getting markers
-     $(function(){
+
+function buildMap(latitude, longitude) {
+      console.log(latitude);
+      console.log(longitude);
         var mapOptions = {
-          center: { lat: 6.5732, lng: 3.39998},
-          zoom: 15 
+          center: { lat: latitude, lng: longitude},
+          zoom: 12
         };
        var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
+       placeMarkers(map);
 
+}
+
+function placeMarkers(map){
         $.get('/markers/', {"one": "two"}, function(data, status){
-          console.log(data);
           $.each(data, function(item, results){
-            console.log(results);
             var latlng = new google.maps.LatLng(results['latitude'], results['longitude']);
             var icon_color = "marker.png";
             if (results['response'] == '3'){
@@ -35,34 +65,22 @@
             new google.maps.Marker({
                 position: latlng,
                 map: map,
-                title: results['response'],
+                title: results['since'] + " ago",
                 icon: "http://maps.google.com/mapfiles/" + icon_color
             });
           });
         });
-      });
+}
     </script>
  </head>
  <body>
      <div id="map-canvas"></div>
      <script type="text/javascript">
-    /*var markers = [
-        {% for marker in markers %}
-            {{ marker }}{% if not forloop.last %}, {% endif %}
-        {% endfor %}
-    ];
-
-    console.error(markers);
-    console.log(typeof(markers));
-    for (var i=0;i< markers.length;i++){
-        //var parts = markers[i].split(',');
-        //console.log(parts.length);
-        console.log(markers[i]);
-        console.log(typeof(markers[i]));
-    }*/
      </script>
      
      {% for marker in markers %}{{marker}}{% endfor %}
+     <div id="current_lat"></div>
+     <div id="current_lon"></div>
  </body>
 </html>
 
