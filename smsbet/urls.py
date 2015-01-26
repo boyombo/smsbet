@@ -8,6 +8,7 @@ urlpatterns = patterns(
     url(r'^$', 'play.views.webplay', name='web_play'),
     url(r'^admin/', include(admin.site.urls)),
     (r'^download/pins/', 'pins.views.download_pins'),
+    url(r'^traffic/$', 'traffiq.views.report'),
 )
 
 urlpatterns += patterns(

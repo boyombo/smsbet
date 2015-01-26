@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'game',
     'pins',
     'play',
+    'traffiq',
 )
 
 MIDDLEWARE_CLASSES = (
