@@ -7,6 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.timesince import timesince
 
 import json
+from django.utils import timezone
 
 
 @csrf_exempt
@@ -41,6 +42,7 @@ def map(request):
 
 
 def get_markers(request):
+    six_hrs_ago = timezone.now() - timezone.timedelta(hours=6)
     markers = [
         {
             'latitude': rep.latitude,
@@ -48,6 +50,6 @@ def get_markers(request):
             'response': rep.response,
             'since': timesince(rep.when)
         }
-        for rep in TrafficReport.objects.all()
+        for rep in TrafficReport.objects.filter(when__gte=six_hrs_ago)
     ]
     return HttpResponse(json.dumps(markers), content_type="application/json")
