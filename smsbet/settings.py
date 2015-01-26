@@ -22,14 +22,14 @@ SECRET_KEY = '(o(flx@r%xt%!d*)$0a90+q1-csn1@qkzn_xz5#)$k=(9#z%$@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = []
 
 
 # Application definition
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,7 +41,10 @@ INSTALLED_APPS = (
     'pins',
     'play',
     'traffiq',
-)
+]
+
+#if DEBUG:
+#    INSTALLED_APPS += ['debug_toolbar']
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -85,6 +88,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),

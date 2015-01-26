@@ -9,4 +9,4 @@ class TrafficReport(models.Model):
     when = models.DateTimeField(default=datetime.now)
 
     def __unicode__(self):
-        return self.light
+        return self.response
