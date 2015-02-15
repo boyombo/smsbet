@@ -47,6 +47,8 @@ def get_markers(request):
         {
             'latitude': rep.latitude,
             'longitude': rep.longitude,
+            'last_latitude': rep.last_latitude,
+            'last_longitude': rep.last_longitude,
             'response': rep.response,
             'since': timesince(rep.when)
         }
