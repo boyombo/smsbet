@@ -42,7 +42,7 @@ def map(request):
 
 
 def get_markers(request):
-    six_hrs_ago = timezone.now() - timezone.timedelta(hours=6)
+    six_hrs_ago = timezone.now() - timezone.timedelta(hours=1)
     markers = [
         {
             'latitude': rep.latitude,
