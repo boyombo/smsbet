@@ -3,7 +3,13 @@ from traffiq.models import TrafficReport
 
 
 class TrafficAdmin(admin.ModelAdmin):
-    list_display = ('latitude', 'longitude', 'response', 'when')
+    list_display = (
+        'latitude',
+        'longitude',
+        'last_latitude',
+        'last_longitude',
+        'response',
+        'when')
 
 
 admin.site.register(TrafficReport, TrafficAdmin)
