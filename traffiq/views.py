@@ -72,6 +72,15 @@ def get_markers(request):
 def get_degrees(rep):
     dx = float(rep.latitude) - float(rep.last_latitude)
     dy = float(rep.longitude) - float(rep.last_longitude)
-    rads = atan2(-dy, dx)
-    rads %= 2*pi
-    return 360.0 - degrees(rads)
+    rads = atan2(dy, dx)
+    deg = degrees(rads)
+    if dy >= 0 and dx >= 0:
+        return deg
+    elif dy >= 0 and dx < 0:
+        return 180.0 - deg
+    elif dy < 0 and dx < 0:
+        return 180.0 + deg
+    else:  # dy < 0 and dx >= 0
+        return 270 + deg
+
+    #rads %= 2*pi
