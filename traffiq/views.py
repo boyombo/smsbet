@@ -51,6 +51,10 @@ def get_markers(request):
         except:
             continue
         else:
+            # If in same spot, ignore
+            if (rep.latitude == rep.last_latitude) and\
+               (rep.longitude == rep.last_longitude):
+                continue
             markers.append(
                 {
                     'latitude': rep.latitude,
