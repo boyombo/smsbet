@@ -43,7 +43,7 @@ def map(request):
 
 
 def get_markers(request):
-    six_hrs_ago = timezone.now() - timezone.timedelta(hours=6)
+    six_hrs_ago = timezone.now() - timezone.timedelta(hours=24)
     markers = []
     for rep in TrafficReport.objects.filter(when__gte=six_hrs_ago):
         try:
