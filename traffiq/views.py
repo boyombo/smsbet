@@ -5,9 +5,10 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.timesince import timesince
+from django.utils import timezone
 
 import json
-from django.utils import timezone
+from math import atan2, degrees, pi
 
 
 @csrf_exempt
@@ -49,9 +50,18 @@ def get_markers(request):
             'longitude': rep.longitude,
             'last_latitude': rep.last_latitude,
             'last_longitude': rep.last_longitude,
+            'angle': str(get_degrees(rep)),
             'response': rep.response,
             'since': timesince(rep.when)
         }
         for rep in TrafficReport.objects.filter(when__gte=six_hrs_ago)
     ]
     return HttpResponse(json.dumps(markers), content_type="application/json")
+
+
+def get_degrees(rep):
+    dx = float(rep.latitude) - float(rep.last_latitude)
+    dy = float(rep.longitude) - float(rep.last_longitude)
+    rads = atan2(-dy, dx)
+    rads %= 2*pi
+    return degrees(rads)
