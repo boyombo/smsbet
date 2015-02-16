@@ -74,4 +74,4 @@ def get_degrees(rep):
     dy = float(rep.longitude) - float(rep.last_longitude)
     rads = atan2(-dy, dx)
     rads %= 2*pi
-    return degrees(rads)
+    return 360.0 - degrees(rads)
