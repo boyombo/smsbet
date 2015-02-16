@@ -79,8 +79,8 @@ def get_degrees(rep):
     elif dy >= 0 and dx < 0:
         return 180.0 - deg
     elif dy < 0 and dx < 0:
-        return 180.0 + deg
+        return 360.0 + deg
     else:  # dy < 0 and dx >= 0
-        return 270 + deg
+        return 360 + deg
 
     #rads %= 2*pi
