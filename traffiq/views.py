@@ -44,18 +44,24 @@ def map(request):
 
 def get_markers(request):
     six_hrs_ago = timezone.now() - timezone.timedelta(hours=6)
-    markers = [
-        {
-            'latitude': rep.latitude,
-            'longitude': rep.longitude,
-            'last_latitude': rep.last_latitude,
-            'last_longitude': rep.last_longitude,
-            'angle': str(get_degrees(rep)),
-            'response': rep.response,
-            'since': timesince(rep.when)
-        }
-        for rep in TrafficReport.objects.filter(when__gte=six_hrs_ago)
-    ]
+    markers = []
+    for rep in TrafficReport.objects.filter(when__gte=six_hrs_ago):
+        try:
+            angle = str(get_degrees(rep))
+        except:
+            continue
+        else:
+            markers.append(
+                {
+                    'latitude': rep.latitude,
+                    'longitude': rep.longitude,
+                    'last_latitude': rep.last_latitude,
+                    'last_longitude': rep.last_longitude,
+                    'angle': angle,
+                    'response': rep.response,
+                    'since': timesince(rep.when)
+                })
+
     return HttpResponse(json.dumps(markers), content_type="application/json")
 
 
