@@ -77,7 +77,7 @@ def get_degrees(rep):
     if dy >= 0 and dx >= 0:
         return deg
     elif dy >= 0 and dx < 0:
-        return 180.0 - deg
+        return deg
     elif dy < 0 and dx < 0:
         return 360.0 + deg
     else:  # dy < 0 and dx >= 0
