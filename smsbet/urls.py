@@ -9,6 +9,7 @@ urlpatterns = patterns(
     url(r'^admin/', include(admin.site.urls)),
     (r'^download/pins/', 'pins.views.download_pins'),
     url(r'^traffic/$', 'traffiq.views.report'),
+    url(r'^emmob/$', 'emmob.views.report'),
     url(r'^map/$', 'traffiq.views.map'),
     url(r'^markers/$', 'traffiq.views.get_markers'),
 )

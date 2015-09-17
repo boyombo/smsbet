@@ -10,5 +10,8 @@ class Entry(models.Model):
     curr_date = models.DateTimeField(default=datetime.now)
     device_id = models.CharField(max_length=200, blank=True)
 
+    class Meta:
+        verbose_name_plural = 'Entries'
+
     def __unicode__(self):
         return self.name
