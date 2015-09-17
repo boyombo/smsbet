@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'pins',
     'play',
     'traffiq',
+    'emmob',
 ]
 
 #if DEBUG:
